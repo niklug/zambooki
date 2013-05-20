@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="User Profile Edit">
+                <message>
+                        <![CDATA[User Edit Default Layout]]>
+                </message>
+        </layout>
+    <fields name="request">
+        <fieldset name="request" label="Basic Parameters">
+            <field name="task" type="hidden" default="userdetails" />
+            <field name="controller" type="hidden" default="user" />
+        </fieldset>
+    </fields>
+</metadata>

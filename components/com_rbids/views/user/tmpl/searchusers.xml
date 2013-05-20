@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="Search for Users">
+                <message>
+                        <![CDATA[Search for Bidders/ Auctioneers ]]>
+                </message>
+        </layout>
+    <fields name="request">
+        <fieldset name="request" label="Basic Parameters">
+            <field name="task" type="hidden" default="searchusers" />
+            <field name="controller" type="hidden" default="user" />
+
+        </fieldset>
+    </fields>
+</metadata>

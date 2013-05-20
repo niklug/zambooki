@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="List Ratings for the current user">
+                <message>
+                        <![CDATA[List Ratings for the current user]]>
+                </message>
+        </layout>
+    <fields name="request">
+        <fieldset name="request" label="Basic Parameters">
+            <field name="task" type="hidden" default="myratings" />
+            <field name="controller" type="hidden" default="ratings"/>
+        </fieldset>
+    </fields>
+</metadata>

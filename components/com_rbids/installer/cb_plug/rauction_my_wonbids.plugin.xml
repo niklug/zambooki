@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0.0" type="plugin" group="user">
+	<name>Reverse Auction Factory - My Won Bids</name>
+	<author>The Factory</author>
+	<creationDate></creationDate>
+	<copyright>(C) 2006 thefactory.ro</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>contact@thefactory.ro</authorEmail>
+	<authorUrl>www.thefactory.ro</authorUrl>
+	<version>1.1</version>
+	<description>
+		Tab Plugin for displaying User Bids from Reverse Auction Factory
+	</description>
+	<files>
+		<filename plugin="rauction_my_wonbids.plugin">rauction_my_wonbids.plugin.php</filename>
+	</files>
+	<params>
+		
+	</params>
+	<tabs>
+		<tab name="Reverse Auction Factory - My Won Bids" description="This tab is just a basic tab." 
+            class="getmywonrbidsTab" fields="0" position="cb_tabmain" displaytype="tab">
+			<params>
+			</params>
+			<fields>
+			</fields>
+		</tab>
+	</tabs>
+	<install>
+		<queries>
+		</queries>
+	</install>
+	<uninstall>
+	</uninstall>
+</cbinstall>

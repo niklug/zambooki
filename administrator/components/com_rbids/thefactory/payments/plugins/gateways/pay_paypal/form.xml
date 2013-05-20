@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+        <field name="paypalemail" type="text" label="FACTORY_PAYPAL_EMAIL" description=""
+            class="inputbox" size="30" required="true" default="change@me.com" />
+        <field name="use_sandbox" type="checkbox" value="1" label="FACTORY_PAYPAL_USE_SANDBOX" description=""
+            class="inputbox"  />
+        <field name="auto_accept" type="checkbox" value="1" label="FACTORY_PAYPAL_AUTOACCEPT_VALID_PAYMENTS" description=""
+            class="inputbox"  />
+	</fieldset>
+</form>

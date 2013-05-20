@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="User - payments history">
+                <message>
+                        <![CDATA[User - payments history]]>
+                </message>
+        </layout>
+    <fields name="request">
+        <fieldset name="request" label="Basic Parameters">
+            <field name="task" type="hidden" default="payments.history" />
+        </fieldset>
+    </fields>
+</metadata>

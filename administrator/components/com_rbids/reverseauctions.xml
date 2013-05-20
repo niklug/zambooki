@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<extension method="upgrade" type="component" version="1.7">
+	<name>RBids</name>
+	<creationDate>February 2013</creationDate>
+	<author>TheFactory</author>
+	<authorEmail>contact@thefactory.ro</authorEmail>
+	<authorUrl>http://www.thefactory.ro</authorUrl>
+	<copyright>TheFactory</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<version>3.4.1</version>
+	<build>${svn.revision}-332</build>
+	<description>The Factory Reverse Auctions</description>
+	<install>
+		<sql>
+			<file charset="utf8" driver="mysql">install.rbids.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file charset="utf8" driver="mysql">uninstall.rbids.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<files folder="components/com_rbids/">
+
+		<filename>controller.php</filename>
+		<filename>defines.php</filename>
+		<filename>options-dist.php</filename>
+		<filename>rbids.php</filename>
+		<filename>rbids.acl.php</filename>
+		<filename>router.php</filename>
+
+		<folder>classes</folder>
+		<folder>controllers</folder>
+		<folder>events</folder>        
+		<folder>gallery</folder>
+		<folder>helpers</folder>
+		<folder>images</folder>
+		<folder>installer</folder>
+		<folder>js</folder>
+		<folder>libraries</folder>
+		<folder>models</folder>
+		<folder>templates-dist</folder>
+		<folder>thefactory</folder>
+		<folder>views</folder>
+	</files>
+    <scriptfile>install.rbids.php</scriptfile>
+
+	<languages folder="components/language">
+		<language tag="en-GB">en-GB.com_rbids.ini</language>
+		<language tag="en-GB">en-GB.mod_rbids.ini</language>
+	</languages>
+	<administration>
+		<menu img="components/com_rbids/assets/images/menu/rbids_logo_icon_menu.png">COM_RBIDS</menu>
+		<submenu>
+			<menu img="components/com_rbids/assets/images/menu/rbids_logo_icon_menu.png" task="offers">COM_RBIDS_MENU_LIST</menu>
+			<menu img="components/com_rbids/assets/images/menu/rbids_logo_icon_menu.png" task="payments.listing">COM_RBIDS_MENU_PAYMENTS</menu>
+			<menu img="components/com_rbids/assets/images/menu/rbids_logo_icon_menu.png" task="comments_administrator">COM_RBIDS_MENU_MESSAGES</menu>
+			<menu img="components/com_rbids/assets/images/menu/rbids_logo_icon_menu.png" task="reviews_administrator">COM_RBIDS_MENU_RATINGS</menu>
+			<menu img="components/com_rbids/assets/images/menu/rbids_logo_icon_menu.png" task="reported_offers">COM_RBIDS_MENU_REPORTED</menu>
+			<menu img="components/com_rbids/assets/images/menu/rbids_logo_icon_menu.png" task="users">COM_RBIDS_MENU_USERS</menu>
+			<menu img="components/com_rbids/assets/images/menu/rbids_logo_icon_menu.png" task="settingsmanager">COM_RBIDS_MENU_SETTINGS</menu>
+			<menu img="components/com_rbids/assets/images/menu/rbids_logo_icon_menu.png" task="about.main">COM_RBIDS_MENU_ABOUT</menu>
+		</submenu>
+
+		<files folder="administrator/components/com_rbids/">
+			<filename>admin.rbids.php</filename>
+			<filename>application.ini</filename>
+			<filename>controller.php</filename>
+			<filename>rbids.config.xml</filename>
+			<filename>toolbar.admin.php</filename>
+			<filename>toolbar.countries.php</filename>
+			<filename>toolbar.importexport.php</filename>
+			<filename>toolbar.rbids.php</filename>
+			<filename>install.rbids.mysql.utf8.sql</filename>
+			<filename>uninstall.rbids.mysql.utf8.sql</filename>
+
+			<folder>assets</folder>
+			<folder>controllers</folder>			
+			<folder>events</folder>
+			<folder>formelements</folder>
+			<folder>htmlelements</folder>
+			<folder>js</folder>
+			<folder>models</folder>
+			<folder>pricing</folder>
+			<folder>tables</folder>
+			<folder>thefactory</folder>
+			<folder>views</folder>
+		</files>
+		<languages>
+			<language tag="en-GB">administrator/language/en-GB.com_rbids.ini</language>
+			<language tag="en-GB">administrator/language/en-GB.com_rbids.sys.ini</language>
+			<language tag="en-GB">administrator/language/en-GB.thefactory.about.ini</language>
+			<language tag="en-GB">administrator/language/en-GB.thefactory.category.ini</language>
+			<language tag="en-GB">administrator/language/en-GB.thefactory.config.ini</language>
+			<language tag="en-GB">administrator/language/en-GB.thefactory.fields.ini</language>
+			<language tag="en-GB">administrator/language/en-GB.thefactory.integration.ini</language>
+			<language tag="en-GB">administrator/language/en-GB.thefactory.mailman.ini</language>
+			<language tag="en-GB">administrator/language/en-GB.thefactory.payments.ini</language>
+			<language tag="en-GB">administrator/language/en-GB.thefactory.positions.ini</language>
+			<language tag="en-GB">administrator/language/en-GB.thefactory.themes.ini</language>
+		</languages>
+	</administration>
+</extension>

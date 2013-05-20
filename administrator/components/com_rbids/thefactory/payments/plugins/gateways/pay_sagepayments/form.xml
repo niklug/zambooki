@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+        <field name="Terminal_id" type="text" label="FACTORY_SAGEPAYMENTS_TERMINAL_ID" description="FACTORY_SAGEPAYMENTS_TERMINAL_ID_DESCRIPTION"
+            class="inputbox" size="30" required="true" default="" />
+        <field name="Logo_url" type="text" label="FACTORY_SAGEPAYMENTS_BANNER" description="FACTORY_SAGEPAYMENTS_BANNER_DESCRIPTION"
+            class="inputbox" size="30" default="" />
+        <field name="B_color" type="text" label="FACTORY_SAGEPAYMENTS_BACKGROUND_COLOR" description="FACTORY_SAGEPAYMENTS_BACKGROUND_COLOR_DESCRIPTION"
+            class="inputbox" size="30" default="" />
+        <field name="BF_color" type="text" label="FACTORY_SAGEPAYMENTS_BACKGROUND_FONT_COLOR" description="FACTORY_SAGEPAYMENTS_BACKGROUND_FONT_COLOR_DESCRIPTION"
+            class="inputbox" size="30"  default="" />
+        <field name="M_color" type="text" label="FACTORY_SAGEPAYMENTS_TABLE_BACKGROUND_COLOR" description="FACTORY_SAGEPAYMENTS_TABLE_BACKGROUND_COLOR_DESCRIPTION"
+            class="inputbox" size="30"  default="" />
+        <field name="F_color" type="text" label="FACTORY_SAGEPAYMENTS_TABLE_FONT_COLOR" description="FACTORY_SAGEPAYMENTS_TABLE_FONT_COLOR_DESCRIPTION"
+            class="inputbox" size="30" default="" />
+	</fieldset>
+</form>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="Specific User Profile">
+                <message>
+                        <![CDATA[The User Profile - The profile of a specific user]]>
+                </message>
+        </layout>
+        <state>
+                <name>Display user</name>
+                <description>Display an user profile (List contains only Users that have their profile filled)</description>
+		<url>
+			<param name="id" key_field="id" value_field="text" type="sql" 
+                default="62" label="Select an user" 
+                query="SELECT a.userid AS id, b.username as text FROM #__rbid_users AS a LEFT JOIN #__users AS b ON b.id = a.userid " />
+            <param name="task" type="hidden" default="userprofile"/>
+		</url>
+        </state>
+    <fields name="request">
+        <fieldset name="request" label="Basic Parameters">
+            <field name="task" type="hidden" default="UserProfile" />
+            <field name="controller" type="hidden" default="user" />
+        </fieldset>
+    </fields>
+</metadata>

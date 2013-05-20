@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="Radius Search on Google Maps">
+                <message>
+                        <![CDATA[Search on Google Maps - Radius search auctions]]>
+                </message>
+        </layout>
+        <state>
+            <url>
+                <param name="task" type="hidden" default="googlemaps"/>
+                <param name="search" type="hidden" default="1"/>
+            </url>
+        </state>
+    <fields name="request">
+        <fieldset name="request" label="Basic Parameters">
+            <field name="task" type="hidden" default="googlemaps" />
+            <field name="controller" type="hidden" default="maps"/>
+            <field name="search" type="hidden" default="1"/>
+        </fieldset>
+    </fields>
+</metadata>

@@ -1,0 +1,31 @@
+.pricing-enable {
+	position: relative;
+	bottom: 3px;
+	left: -20px;
+	height: 30px !important;
+	border-radius: 0px !important;
+	width: auto !important;
+	border: 0px !important;
+	background-color: transparent !important;
+	z-index: 1000 !important;
+}
+
+#cpanel div.icon {
+	margin-bottom: 3px !important;
+}
+
+.info_payment {
+	font-size: 16px;
+}
+
+.pay_not_now{
+	display: inline-block;
+	margin-top: 22px;
+	text-decoration: underline !important;
+	font-size: 14px;
+}
+.pay_not_now:hover{
+	text-decoration: none !important;
+}
+
+

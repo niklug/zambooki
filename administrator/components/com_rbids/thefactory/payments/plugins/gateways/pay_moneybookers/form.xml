@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+        <field name="email" type="text" label="FACTORY_MONEYBOOKERS_EMAIL" description=""
+            class="inputbox" size="30" required="true" default="change@me.com" />
+	</fieldset>
+</form>

@@ -1,0 +1,233 @@
+/************************************************************
+*
+*  GENERAL ADMIN STYLES
+*
+**************************************************************/
+#seller_groups, #bidder_groups {
+	width: 250px;
+}
+
+.adminFieldList {
+	background-color: #FFFFFF;
+}
+
+.admintable {
+	border-collapse: collapse;
+}
+
+.admintable tr.greytopborder td {
+	vertical-align: top;
+	border-top: 1px solid #DDDDDD;
+	padding: 2px 0 2px 0;
+}
+
+/* Make a button stylish from an ordinary link */
+a.submit_button {
+	cursor: default;
+	border: 1px solid #C0C0C0;
+	background-color: #FFFFFF;
+	padding: 2px 5px;
+	color: #494949;
+}
+
+a.submit_button:hover {
+	text-decoration: none;
+	border-bottom: 2px solid #878787;
+	border-right: 2px solid #878787;
+
+	/* Prevent selecting text */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+a.submit_button:active {
+	padding-left: 6px;
+	padding-right: 4px;
+	background-color: #FFFFCF;
+	border: 1px solid #C0C0C0;
+}
+
+fieldset {
+	background-color: #FFFFFF;
+}
+
+.tiny {
+	width: auto;
+	height: 1px;
+	color: #acdcff;
+}
+
+.v_spacer_5 {
+	height: 5px;
+	/* for span */
+	display: block;
+}
+
+input
+ {
+	height: 20px;
+	line-height: 20px;
+	color: #494949;
+}
+select {
+	padding: 3px;
+}
+input[type=submit],
+button {
+	margin-top: 0 !important;
+	min-width: 50px;
+	height: 25px;
+	line-height: 20px;
+	color: #494949;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+input[type=submit]:hover,
+button:hover {
+	border-right: 2px solid #494949;
+	border-bottom: 2px solid #494949;
+}
+
+/**
+  * Reset height for select
+  * with multiple attribute present
+  **/
+select[multiple] {
+	height: auto;
+	line-height: normal;
+}
+
+.label {
+	font-size: 11px;
+	font-weight: bold;
+}
+
+div#element-box div.m {
+	/*background-color: #FFFFFF;*/
+}
+
+/****************************************************************************
+* JS Error tip
+*****************************************************************************/
+
+.auctionErrorTip {
+	background-color: #292829;
+	color: #FFF;
+	padding: 3px 10px 0;
+	font-weight: bold;
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength = 4, Direction = 135, Color = '#000000');
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+}
+.adminform.no_border{
+	border: 0;
+}
+/******************************************************************
+*
+* Auction EDIT PAGE
+*
+********************************************************************/
+
+/* General styles */
+fieldset input,
+fieldset textarea,
+fieldset select,
+fieldset img,
+fieldset button {
+	float: none;
+}
+
+.auction_notice {
+	font-size: 120%;
+	font-weight: bolder;
+	color: #FFFF00;
+	background-color: #A80000;
+	-moz-border-radius: 15px;
+	border-radius: 12px;
+	padding: 20px 10px 20px 10px;
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.auction_edit_table_left tr td {
+	padding: 4px;
+}
+
+.paramlist_key {
+	vertical-align: top;
+}
+
+label.paramlist_key,
+.paramlist_key label {
+	color: #09203b;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.price {
+	text-align: right;
+}
+
+.adminFieldSet {
+	background-color: #FFFFFF;
+}
+
+/* Auction edit page -> Details right panel (accordion) */
+
+.top_tr_delimiter td {
+	border-top: 1px solid #EEE;
+}
+
+#raffle_edit_table_box
+.pane-sliders {
+	margin: 0 !important;
+}
+
+.pane_panel_table_box {
+	margin-bottom: 10px;
+	border-collapse: collapse;
+}
+
+.pane_panel_table_box tr td:first-child {
+	width: 40%;
+	padding-left: 10px;
+
+}
+
+/* Auction edit page ->  Images gallery */
+
+.images_type_td {
+	width: 100%;
+	height: 25px;
+	padding-left: 10px;
+	background-color: #D0E2F8;
+}
+
+.images_type_td .images_type {
+	color: #09203b;
+	font-weight: bold;
+}
+
+/*************************************************************
+*
+* PAYMENTS MANAGER
+*
+**************************************************************/
+.payment_manager_icons
+.quick_icon_image_button {
+	margin-left: 0 !important;
+}

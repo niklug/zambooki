@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<groups name = "fieldgroup1" label = "General Settings">
+		<fieldset name = "global_settings" label = "Global Settings">
+			<field name = "select_winner_automatic" type = "radio" default = "0" label = "Automatic winner selection"
+			       description = "If this option enabled, cron will choose automatically the winner based on price comparison criterias.">
+				<option value = "0">No</option>
+				<option value = "1">Yes</option>
+			</field>
+			<field name = "auctiontype_enable" type = "radio" default = "1" label = "Allow users to choose type of auctions"
+			       description = "If enabled public or private or invite can be selected by poster. Otherwise you must set a default type of ads posted of all users">
+				<option value = "0">No</option>
+				<option value = "1">Yes</option>
+			</field>
+			<field name = "auctiontype_val" type = "list" default = "1" label = "Setup Auction type default value"
+			       description = "If users can not choose the ad type this is the default value at posting">
+				<option value = "1">Public</option>
+				<option value = "2">Private</option>
+				<option value = "5">Invite</option>
+			</field>
+			<field name = "enable_auctiontype_public" type = "checkbox" value = "1" default = "1" label = "Enable public auctions"
+			       description = "If enabled users can create public auctions type">
+			</field>
+			<field name = "enable_auctiontype_private" type = "checkbox" value = "1" default = "1" label = "Enable private auctions"
+			       description = "If enabled users can create private auctions type">
+			</field>
+			<field name = "enable_auctiontype_invite" type = "checkbox" value = "1" default = "1" label = "Enable invite auctions"
+			       description = "If enabled users can create invite auctions type">
+			</field>
+			<field name = "allow_only_invited_users" type = "checkbox" value = "1" default = "1" label = "'Invite' Auction type is visible only for invited users"
+			       description = "If enabled only invited users can view 'Invite' auctions">
+			</field>
+			<field name = "aucttype_invite_interface" type="radio" default = "both" label="Choose Invite interface"
+			       description="Choose invite mode for auctions type 'Invite'">
+				<option value="users">Users</option>
+				<option value="groups">Groups</option>
+				<option value="both">Both</option>
+			       </field>
+			<field name = "auctionpublish_enable" type = "radio" default = "1" label = "Allow users to set published/unpublished status"
+			       description = "If enabled published or unpublished can be selected by poster. Otherwise you must set a default status of ads posted of all users">
+				<option value = "0">No</option>
+				<option value = "1">Yes</option>
+			</field>
+			<field name = "allow_sellers_edit" type = "radio" default = "1" label = "Allow admin to choose a seller"
+			       description = "If enabled display a list with all sellers in add/edit auction page">
+				<option value = "0">No</option>
+				<option value = "1">Yes</option>
+			</field>
+			<field name = "auctionpublish_val" type = "list" default = "1" label = "Setup auction status default value"
+			       description = "If users can not choose the ad status this is the default value at posting">
+				<option value = "1">Published</option>
+				<option value = "0">Unpublished</option>
+			</field>
+			<field name = "cron_password" type = "text" default = "pass" label = "CRON Password"
+			       description = "Password used to safely call the cron script">
+			</field>
+
+		</fieldset>
+		<fieldset name = "datetime_settings" label = "Date Time Options">
+			<field name = "date_format" type = "dateformat" default = "" label = "Default Date format for Auctions"
+			       description = "">
+			</field>
+			<field name = "date_time_format" type = "timeformat" default = "" label = "Default Time format for Auctions"
+			       description = "">
+			</field>
+		</fieldset>
+		<fieldset name = "listings_settings" label = "Listing Settings">
+			<field name = "nr_items_per_page" type = "text" default = "10" label = "Items per page"
+			       description = "Default number of auctions per page for all listings">
+			</field>
+			<field name = "inner_categories" type = "checkbox" value = "1" default = "1" label = "List Auctions from Subcategories in parent category"
+			       description = "Show auctions from the subcategories of the current category together in the listing">
+			</field>
+			<field name = "enable_hour" type = "checkbox" value = "1" default = "1" label = "Enable Auction expiration Hour"
+			       description = "Allow users to specfy an expiration hour for auctions (if off, the auction expires at midnight)">
+			</field>
+			<field name = "enable_countdown" type = "checkbox" value = "1" default = "1" label = "Enable Countdown"
+			       description = "If Enabled the Javascript countdown will be displayed for the auctions">
+			</field>
+			<field name = "availability" type = "text" default = "3" label = "Publish for Max Months"
+			       description = "Max Number of months an Auction is allowed to be published. Enter 0 for unlimited time.">
+			</field>
+			<field name = "archive" type = "text" default = "3" label = "Months to keep in Archive "
+			       description = "Number of months to keep the expired/closed auction in archive before deleting it. Choose 0 to keep the auctions indefinetly">
+			</field>
+			<field name = "max_nr_tags" type = "text" default = "5" label = "Max Number of Tags"
+			       description = "Maximum number of tags allowed for a listing">
+			</field>
+
+		</fieldset>
+		<fieldset name = "privacy_settings" label = "Privacy/Profile Settings">
+			<field name = "allow_messenger" type = "checkbox" value = "1" default = "1" label = "Allow Messenger Fields"
+			       description = "Allow users to specify Instant Messaging information">
+			</field>
+			<field name = "allow_user_set_messenger_fields_visibility" type = "checkbox" value = "1" default = "1" label = "Allow users to set messenger fields visibility"
+			       description = "Allow users to specify which Instant Messaging information will be visible when someone view them profile. If not allow, default status is set to visible.">
+			</field>
+			<field name = "allow_paypal" type = "checkbox" value = "1" default = "1" label = "Use Paypal Email"
+			       description = "Users may use Paypal Email">
+			</field>
+			<field name = "hide_contact" type = "checkbox" value = "1" default = "1" label = "Hide Contact information"
+			       description = "Hide users contact information in details and listing (Paypal, Address, Messenger)">
+			</field>
+		</fieldset>
+		<fieldset name = "message_settings" label = "Messaging Settings">
+			<field name = "allow_messages" type = "checkbox" value = "1" default = "1" label = "Allow messaging"
+			       description = "">
+			</field>
+			<field name = "allow_guest_messaging" type = "checkbox" value = "1" default = "1" label = "Allow guest messaging"
+			       description = "">
+			</field>
+			<field name = "enable_captcha" type = "checkbox" value = "1" default = "1" label = "Enable Captcha"
+			       description = "">
+			</field>
+
+		</fieldset>
+		<fieldset name = "attachement_settings" label = "Attachments">
+			<field name = "nda_option" type = "checkbox" value = "1" default = "1" label = "Enable NDA"
+			       description = "Allow users to ask for an Non disclosure Agreement before bidding">
+			</field>
+			<field name = "nda_compulsory" type = "checkbox" value = "1" default = "1" label = "NDA Required"
+			       description = "NDA is required for all new auctions">
+			</field>
+			<field name = "nda_extensions" type = "text" default = "txt,doc" label = "Allowed NDA extensions"
+			       description = "Only these File Extensions are allowed for NDA files">
+			</field>
+			<field type="spacer" name="myspacer1" hr="true" class="tiny" />
+			<field name = "enable_attach" type = "checkbox" value = "1" default = "1" label = "Enable Attachment Files"
+			       description = "Allow users to attach files to an auction">
+			</field>
+			<field name = "attach_compulsory" type = "checkbox" value = "1" default = "1" label = "Attachment File Required"
+			       description = "Attachment File is required for all new auctions">
+			</field>
+			<field name = "enable_bid_attach" type = "checkbox" value = "1" default = "1" label = "Enable Bid Attachment Files"
+			       description = "Allow bidders to attach files for send bids">
+			</field>
+			<field name = "bid_attach_compulsory" type = "checkbox" value = "1" default = "1" label = "Bid Attachment File Required"
+			       description = "Attachment File is required for all send bids">
+			</field>
+			<field type="spacer" name="myspacer2" hr="true" class="tiny" />
+			<field name = "attach_max_size" type = "text" default = "1024" label = "Max Attachment Size (kB)"
+			       description = "Maximum attachment files">
+			</field>
+			<field name = "attach_extensions" type = "text" default = "zip,rar,txt" label = "Allowed Attachment extensions"
+			       description = "Only these File Extensions are allowed for Attachment files">
+			</field>
+		</fieldset>
+	</groups>
+	<groups name = "fieldgroup2" label = "Workflow settings">
+		<fieldset name = "flow_settings" label = "Set up the way new Auctions are published">
+			<field name = "workflow" type = "workflow" default = "quick" label = "New Auction posting process"
+			       description = "Pick the way the Auction is published">
+			</field>
+		</fieldset>
+		<fieldset name = "flow_settings2" label = "Other Workflow Settings">
+			<field name = "admin_approval" type = "checkbox" value = "1" default = "0" label = "Admin must approve every Listing"
+			       description = "If enabled, every listing will be pending until the administrator will approve them in the backend">
+			</field>
+			<field name = "bid_accept_user_commision" type="list" default="1" label = "Who pay commission after bid is accepted?"
+			       description="Choose the user that will pay commission for bid accepting">
+				<option value = "1">Auctioneer</option>
+				<option value = "2">Winner</option>
+			</field>
+		</fieldset>
+	</groups>
+
+	<groups name = "fieldgroup3" label = "Image Settings">
+		<fieldset name = "image_settings" label = "Auction Listing Images">
+			<field name = "gd_version" type = "infogdversion" />
+			<field name = "disable_images" type = "checkbox" default = "0" value = "1" label = "Disable Images"
+			       description = "Disable Images for listings. If checked, there will be no gallery, no image to upload" />
+		</fieldset>
+		<fieldset name = "listing_image_settings" label = "Listing Options">
+			<field name = "max_picture_size" type = "text" default = "1024" size = "6" label = "Maximum picture size"
+			       description = "Maximum size allowed for uploaded pictures" />
+			<field name = "maxnr_images" type = "text" default = "3" size = "3" label = "Max Nr of Images per listing"
+			       description = "Maximum allowed images per listing" />
+			<field name = "main_picture_require" type = "checkbox" default = "1" value = "1" label = "Require Main Picture for listing"
+			       description = "The main Picture is required for all new listings" />
+			<field name = "gallery" type = "gallerylist" label = "Choose Gallery Type"
+			       description = "Choose from Available Galleries" />
+		</fieldset>
+		<fieldset name = "image_thumb" label = "Thumbnail Settings">
+			<field name = "thumb_width" type = "text" default = "50" size = "5" label = "Image thumb width resize"
+			       description = "Image thumbnail will be resized to this width" />
+			<field name = "thumb_height" type = "text" default = "50" size = "5" label = "Image thumb height resize"
+			       description = "Image thumbnail will be resized to this height" />
+		</fieldset>
+		<fieldset name = "image_medium" label = "Medium Image Settings">
+			<field name = "medium_width" type = "text" default = "500" size = "5" label = "Medium Image width resize"
+			       description = "Image will be resized to this width" />
+			<field name = "medium_height" type = "text" default = "500" size = "5" label = "Medium Image height resize"
+			       description = "Image will be resized to this height" />
+		</fieldset>
+
+	</groups>
+
+	<groups name = "fieldgroup4" label = "ACL">
+		<fieldset name = "acl_settings" label = "Auction Listing Images">
+			<field name = "enable_acl" type = "checkbox" default = "0" value = "1" label = "Enable ACL (Access Control List)"
+			       description = "Enabling this feature will allow you to select specific groups that can bid or publish auctions" />
+			<field name = "bidder_groups" type = "usergroup" default = "" multiple = "true" size = "10" label = "Bidder Groups"
+			       description = "Choose the Groups that are allowed to bid" />
+			<field name = "seller_groups" type = "usergroup" default = "" multiple = "true" size = "10" label = "Seller Groups"
+			       description = "Choose the Groups that are allowed to post Auctions" />
+		</fieldset>
+	</groups>
+	<groups name = "fieldgroup5" label = "Google Maps">
+		<fieldset name = "googlemaps_settings" label = "Googlemaps API Setup">
+			<field name = "google_key" type = "text" default = "" size = "80" label = "Google Mapi API key (&lt;a href='http://code.google.com/apis/maps/documentation/javascript/tutorial.html#api_key' target='_blank'&gt;Get API Key&lt;/a&gt;)"
+			       description = "Put in your Domain specific Google MAP Key" />
+			<field name = "googlemap_defx" type = "text" default = "" size = "20" label = "Google Maps X (&lt;a onclick=&quot;window.open('index.php?option=com_rbids&amp;controller=maps&amp;task=googlemap_tool&amp;tmpl=component','SelectGoogleMap','width=650,height=500');return false&quot; href='javascript:void(0)'&gt;Pick Position&lt;/a&gt;)"
+			       description = "Latitude" />
+			<field name = "googlemap_defy" type = "text" default = "" size = "20" label = "Google Maps Y"
+			       description = "Longitude" />
+			<field name = "googlemap_default_zoom" type = "text" default = "7" size = "4" label = "Google Maps Zoom Level"
+			       description = "Zoom 1-10" />
+			<field name = "googlemap_distance" type = "list" default = "0" label = "Distance Unit"
+			       description = "">
+				<option value = "0">Miles</option>
+				<option value = "1">Kilometers</option>
+			</field>
+			<field name = "googlemap_unit_available" type = "text" default = "5,25,60,100,150" size = "30" label = "Google Maps Distance Units"
+			       description = "" />
+		</fieldset>
+		<fieldset name = "googlemaps_indetails_settings" label = "Googlemaps in Auction Details">
+			<field name = "map_in_auction_details" type = "checkbox" default = "0" value = "1" label = "Enable Googlemaps in Auction Details"
+			       description = "Google maps will show in every Auction Details page" />
+			<field name = "googlemap_gx" type = "text" default = "450" size = "5" label = "Map Width in Auction Details"
+			       description = "" />
+			<field name = "googlemap_gy" type = "text" default = "450" size = "5" label = "Map Height in Auction Details"
+			       description = "" />
+			<field name = "googlemap_maptype" type = "list" default = "" label = "Maps Types" size = "1"
+			       description = "Google Map Type">
+				<option value = "ROADMAP">Roadmap</option>
+				<option value = "HYBRID">Hybrid</option>
+				<option value = "SATELLITE">Satellite</option>
+				<option value = "TERRAIN">Terrain</option>
+			</field>
+		</fieldset>
+	</groups>
+	<groups name = "fieldgroup6" label = "Spam protection">
+		<fieldset name = "spam_recaptcha_settings" label = "reCaptcha Settings">
+			<field name = "recaptcha_public_key" type = "text" default = "" size = "50" label = "ReCaptcha public key (&lt;a href='http://www.google.com/recaptcha' target='_blank'&gt;Get it here&lt;/a&gt;)"
+			       description = "" />
+			<field name = "recaptcha_private_key" type = "text" default = "" size = "50" label = "ReCaptcha private key"
+			       description = "" />
+			<field name = "recaptcha_theme" type = "list" default = "" label = "ReCaptcha Theme"
+			       description = "">
+				<option value = "red">Red</option>
+				<option value = "white">White</option>
+				<option value = "blackglass">Backglass</option>
+				<option value = "clean">Clean</option>
+			</field>
+		</fieldset>
+		<fieldset name = "spam_email_settings" label = "Email Spam Protection">
+			<field name = "enable_antispam_bot" type = "checkbox" default = "0" value = "1" label = "Enable Email Spam protection"
+			       description = "" />
+			<field name = "choose_antispam_bot" type = "list" default = "" label = "Choose Email Spam plugin"
+			       description = "">
+				<option value = "joomla">Joomla</option>
+				<option value = "smarty">Smarty</option>
+				<option value = "recaptcha">reCaptcha</option>
+			</field>
+			<field name = "mailcaptcha_public_key" type = "text" default = "" size = "50" label = "MailCaptcha public key (&lt;a href='http://www.google.com/recaptcha/mailhide/apikey' target='_blank'&gt;Get it here&lt;/a&gt;)"
+			       description = "" />
+			<field name = "mailcaptcha_private_key" type = "text" default = "" size = "50" label = "MailCaptcha private key"
+			       description = "" />
+		</fieldset>
+	</groups>
+	<groups name = "fieldgroup7" label = "Terms and Conditions">
+		<fieldset name = "terms_and_conditions_settings" label = "Terms and Conditions Text" hidelabel = "1">
+			<field name = "terms_and_conditions" type = "editor" filter = "safehtml" label = "Terms and Conditions HTML"
+			       description = "" />
+		</fieldset>
+	</groups>
+	<groups name = "fieldgroup8" label = "System Info">
+		<fieldset name = "system_info" label = "System Information" hidelabel = "1">
+			<field name = "system_info" type = "systeminfo" label = "System Info" hidelabel = "1"
+			       description = "" />
+		</fieldset>
+		<fieldset name = "cache_info" label = "Cache Information" hidelabel = "1">
+			<field name = "cache_info" type = "cacheinfo" label = "Cache Info/Management" hidelabel = "1"
+			       description = "" />
+		</fieldset>
+	</groups>
+</form>

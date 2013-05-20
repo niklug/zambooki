@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="View One specific Auction">
+                <message>
+                        <![CDATA[View Auction Detail Layout]]>
+                </message>
+        </layout>
+        <state>
+                <name>Display auction</name>
+                <description>Display an auction details page</description>
+    		<url>
+    			<param name="id" key_field="id" value_field="title" type="sql" default="1" 
+                    label="Select an auction" 
+                    query="SELECT a.id,a.title FROM #__rbid_auctions AS a WHERE a.published=1 and a.close_offer=0 AND a.close_by_admin=0 " 
+                />
+                <param name="task" type="hidden" default="viewbids"/>
+    		</url>
+        </state>
+    <fields name="request">
+        <fieldset name="request" label="Basic Parameters">
+            <field name="task" type="hidden" default="viewbids" />
+            <field name="id" key_field="id" value_field="title" type="sql" default="1"
+                label="Select an auction"
+                query="SELECT a.id,a.title FROM #__rbid_auctions AS a WHERE a.published=1 and a.close_offer=0 AND a.close_by_admin=0 "
+            />
+        </fieldset>
+    </fields>
+</metadata>
