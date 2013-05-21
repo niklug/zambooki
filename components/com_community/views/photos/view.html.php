@@ -1654,20 +1654,26 @@ class CommunityViewPhotosUserHandler extends CommunityViewPhotoHandler
 		{
 			case '':
 				if ($albumId) $this->view->addSubmenuItem('index.php?option=com_community&view=photos&userid=' . $this->user->id . '&task=album&albumid=' . $albumId , JText::_('COM_COMMUNITY_PHOTOS_BACK_TO_ALBUM'));
+                                
 				$this->view->addSubmenuItem('index.php?option=com_community&view=photos&task=display', JText::_('COM_COMMUNITY_PHOTOS_ALL_PHOTOS'));
 				$this->view->addSubmenuItem('index.php?option=com_community&view=photos&task=newalbum&userid=' . $my->id, JText::_('COM_COMMUNITY_PHOTOS_CREATE_PHOTO_ALBUM'),'',true);
 				break;
+          
 			case 'photo':
 				if ($albumId) { 
                                     $session = JFactory::getSession();
                                     $allphotos = $session->get('allphotos');
+                                    
                                     if($allphotos){
                                         $this->view->addSubmenuItem('', JText::_('Back'), "history.back()");
                                         $this->view->addSubmenuItem('index.php?option=com_community&view=photos&userid=' . $this->user->id . '&task=album&albumid=' . $albumId , JText::_('Go to Album'));
                                     } else {
-                                        $this->view->addSubmenuItem('index.php?option=com_community&view=photos&userid=' . $this->user->id . '&task=album&albumid=' . $albumId , JText::_('COM_COMMUNITY_PHOTOS_BACK_TO_ALBUM'));
-                                    }
+                                        //$this->view->addSubmenuItem('index.php?option=com_community&view=photos&userid=' . $this->user->id . '&task=album&albumid=' . $albumId , JText::_('COM_COMMUNITY_PHOTOS_BACK_TO_ALBUM'));
+                                        $this->view->addSubmenuItem('', JText::_('Back'), "history.go(-1)");
+                             
+                                    }   
                                 }
+                                
 				$this->view->addSubmenuItem('index.php?option=com_community&view=photos&task=display', JText::_('COM_COMMUNITY_PHOTOS_ALL_PHOTOS'));
 				if( COwnerHelper::isCommunityAdmin() || ($this->my->id == $album->creator && ($this->my->id != 0) ) )
 				{
@@ -1692,6 +1698,11 @@ class CommunityViewPhotosUserHandler extends CommunityViewPhotoHandler
 			break;
 			case 'myphotos':
 			default:
+                                $session = JFactory::getSession();
+                                $allphotos = $session->get('allphotos');
+                                if(!$allphotos) {
+                                    $this->view->addSubmenuItem('', JText::_('Back'), "history.go(-1)");
+                                }
 				$this->view->addSubmenuItem('index.php?option=com_community&view=photos&task=display', JText::_('COM_COMMUNITY_PHOTOS_ALL_PHOTOS'));
 
 				if( $this->my->id != 0 || COwnerHelper::isCommunityAdmin() )

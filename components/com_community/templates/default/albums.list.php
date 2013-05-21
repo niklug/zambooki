@@ -30,7 +30,7 @@ defined('_JEXEC') or die();
             height: 50px;
             width: 200px;
             float:left" 
-           href="index.php?option=com_community&view=photos&task=album&userid=<?php echo $user->id?>&allphotos=1"
+           href="<?php echo CRoute::_('index.php?option=com_community&view=photos&task=album&userid=' . $user->id . '&allphotos=1') ?>"
            title="Turn Album View On/Off">
         </a>
        <input type="text" name="search_photos" id="filter_search" placeholder="<?php echo JText::_('Search Photos'); ?>" value="<?php echo $search_photos?>" title="<?php echo JText::_('Search Photos'); ?>" />
