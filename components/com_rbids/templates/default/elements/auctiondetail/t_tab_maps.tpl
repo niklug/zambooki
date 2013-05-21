@@ -16,7 +16,7 @@
         });
      {/literal}
    {/import_js_block}
-   {starttab paneid="tab3" text="COM_RBIDS_LOCATION_ON_MAP"|translate}
+   
         <div id="map_canvas" style="width: {$cfg->googlemap_gx|default:250}px; height: {$cfg->googlemap_gy|default:250}px;margin-top:15px;margin-bottom: 15px;"></div>
-   {endtab}
+   
 {/if}

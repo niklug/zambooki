@@ -134,6 +134,10 @@
             </div>
             <span class = "v_spacer_5"></span>
 	{positions position="detail-left" item=$auction page="auctions"}
+        <div class = "box_title">{'COM_RBIDS_LOCATION_ON_MAP'|translate}</div>
+        <div class="box_content">{include file="elements/auctiondetail/t_tab_maps.tpl"}</div>
+        <div class = "box_title">{'COM_RBIDS_SCREENSHOTS'|translate}</div>
+        <div class="box_content">{include file="elements/auctiondetail/t_tab_screenshots.tpl"}</div>
         </td>
 
     {* Right side include auctioneer details and auction details *}
@@ -219,6 +223,8 @@
                 </tr>
             </table>
 	{positions position="detail-right" item=$auction page="auctions"}
+        <div style="margin-top: 4px;" class = "box_title">{'COM_RBIDS_LIST_OF_BIDS'|translate}</div>
+        <div class="box_content">{include file="elements/auctiondetail/t_tab_bids.tpl"}</div>
         </td>
     </tr>
 </table>
@@ -230,12 +236,8 @@
 {* -------------------  TABBING PART ---------------------*}
     <tr>
         <td>
-	{startpane id="content-pane" usecookies=0}
-	    {include file="elements/auctiondetail/t_tab_bids.tpl"}
-	    {include file="elements/auctiondetail/t_tab_messages.tpl"}
-	    {include file="elements/auctiondetail/t_tab_maps.tpl"}
-	    {include file="elements/auctiondetail/t_tab_screenshots.tpl"}
-	{endpane}
+            <div style="margin-top: 4px;" class = "box_title">{'COM_RBIDS_MESSAGES'|translate}</div>
+            <div class="box_content">{include file="elements/auctiondetail/t_tab_messages.tpl"}</div>
         </td>
     </tr>
     <tr>

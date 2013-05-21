@@ -1,6 +1,6 @@
 {* Messages Tab *}
 {if $cfg->allow_messages}
-	{starttab paneid="tab2" text="COM_RBIDS_MESSAGES"|translate}
+	
 <form action = "{$ROOT_HOST}index.php" method = "POST" name = "auctionMessageForm">
     <input type = "hidden" name = "option" value = "{$option}" />
     <input type = "hidden" name = "task" value = "savemessage" />
@@ -137,5 +137,5 @@
         </div>
     </form>
 </div>
-	{endtab}
+	
 {/if}

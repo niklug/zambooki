@@ -1,5 +1,5 @@
 {if $is_logged_in}
-	{starttab paneid="tab1" text="COM_RBIDS_LIST_OF_BIDS"|translate}
+	
 <table id = "table_bids_list" xmlns = "http://www.w3.org/1999/html" xmlns = "http://www.w3.org/1999/html" xmlns = "http://www.w3.org/1999/html">
 
     <tbody>
@@ -90,6 +90,6 @@
 	    {/section}
     </tbody>
 </table>
-	{endtab}
+	
 
 {/if}
