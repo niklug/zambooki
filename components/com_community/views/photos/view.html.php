@@ -425,16 +425,17 @@ class CommunityViewPhotos extends CommunityView
 
 	public function _getAllAlbumsHTML( $albums , $type = PHOTOS_USER_TYPE, $pagination = NULL )
 	{
-                $allphotos  = JRequest::getVar('allphotos');
+                $albumsview  = JRequest::getVar('albumsview');
                 $resetallphotos  = JRequest::getVar('resetallphotos');
                 $session = JFactory::getSession();
                 
                 if($resetallphotos) {
-                    $session->set('allphotos', 0);
+                    $session->set('albumsview', 1);
                 }
+               
+        
+                if(!$session->get('albumsview')) {
           
-                if($allphotos OR $session->get('allphotos')) {
-                    
                     $mainframe	= JFactory::getApplication();
                     $mainframe->redirect( 'index.php?option=com_community&view=photos&task=album&albumid=149&userid=3115&allphotos=1');
     
@@ -991,7 +992,7 @@ class CommunityViewPhotos extends CommunityView
                 $allphotos  = JRequest::getVar('allphotos');
                 if($allphotos) {
                     $session = JFactory::getSession();
-                    $session->set('allphotos', '1');
+                    $session->set('albumsview', '0');
                     $this->albumall();
                     
                     return;
@@ -1698,8 +1699,7 @@ class CommunityViewPhotosUserHandler extends CommunityViewPhotoHandler
 			break;
 			case 'myphotos':
 			default:
-                                $session = JFactory::getSession();
-                                $allphotos = $session->get('allphotos');
+                                $allphotos  = JRequest::getVar('allphotos');
                                 if(!$allphotos) {
                                     $this->view->addSubmenuItem('', JText::_('Back'), "history.go(-1)");
                                 }

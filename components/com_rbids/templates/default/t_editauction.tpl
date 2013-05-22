@@ -40,21 +40,10 @@
 <a title = "rbid_details" name = "rbid_details" id = "rbid_details"></a>
 <table width = "100%" cellpadding = "0" cellspacing = "0" border = "0" class = "table_edit_form_box">
 
-    <tr>
-        <td class = "auction_dbk_c" align = "right" width="150px">
-            <label class = "auction_lables">{"COM_RBIDS_PUBLISHED"|translate}:</label>
-        </td>
-        <td class = "auction_dbk">
-	{if $cfg->auctionpublish_enable}
-            {if $task=='editauction' && $auction->published}{"COM_RBIDS_YES"|translate}{else}{$lists.published}{/if}
-        {else}
-            {if ($auction->id && $auction->published)||(!$auction->id && $cfg->auctionpublish_val)}{"COM_RBIDS_YES"|translate}{else}{"COM_RBIDS_NO"|translate}{/if}
-        {/if}
-        </td>
-    </tr>
+
 {if $lists.userid}
     <tr>
-        <td class = "auction_dbk_c" align = "right">
+        <td class = "auction_dbk_c" align = "right"  width="150px">
             <label class = "auction_lables">{'COM_RBIDS_SELLER'|translate}: </label>
         </td>
         <td class = "auction_dbk_c">
@@ -408,7 +397,18 @@
 {/if}
 
 <table width = "100%" cellpadding = "0" cellspacing = "0" class = "table_edit_form_box">
+
     <tr>
+                <td class = "auction_dbk_c" align = "right" width="150px">
+            <label class = "auction_lables">{"COM_RBIDS_PUBLISHED"|translate}:</label>
+        </td>
+        <td class = "auction_dbk">
+	{if $cfg->auctionpublish_enable}
+            {if $task=='editauction' && $auction->published}{"COM_RBIDS_YES"|translate}{else}{$lists.published}{/if}
+        {else}
+            {if ($auction->id && $auction->published)||(!$auction->id && $cfg->auctionpublish_val)}{"COM_RBIDS_YES"|translate}{else}{"COM_RBIDS_NO"|translate}{/if}
+        {/if}
+        </td>
         <td align = "right" class = "auction_edit_section" colspan = "2">
             <input type = "submit" name = "save" value = "{'COM_RBIDS_SAVE'|translate}" class = "button validate" />
         </td>

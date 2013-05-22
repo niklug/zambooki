@@ -1526,3 +1526,7 @@ a:hover img {
 .radiusSelect {
 	color: #494949;
 }
+
+.toggle-editor {
+    display: none;
+}
