@@ -55,10 +55,16 @@
 		var window = this.opener;
 		var xcoord = window.document.getElementById("googleX");
 		var ycoord = window.document.getElementById("googleY");
-		xcoord.value = document.getElementById("gmap_posx").value;
-		ycoord.value = document.getElementById("gmap_posy").value;
+                var latitude = document.getElementById("gmap_posx").value;
+		xcoord.value = latitude;
+                var longitude = document.getElementById("gmap_posy").value;
+		ycoord.value = longitude;
+                window.getContractorsCountByCat(latitude, longitude);
+                window.getContractorsCountAllCat(latitude, longitude);
 		this.close();
 	}
+        
+        
     var gmap_showmap=function ()
     {
         var marker = new google.maps.Marker({

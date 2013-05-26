@@ -332,3 +332,95 @@ function auctionTypeExtras(type) {
 		el.style.display = 'none';
 	}
 }
+
+
+    jQuery.noConflict();
+    jQuery( document ).ready(function() {
+        var latitude = jQuery('#googleX').val();
+        var longitude = jQuery('#googleY').val();
+        if(longitude && latitude) {
+            getContractorsCountByCat(latitude, longitude);
+            getContractorsCountAllCat(latitude, longitude);
+        }
+
+    });
+
+
+
+
+    function getContractorsCountByCat(latitude, longitude) {
+    
+        jQuery.noConflict();
+        var category_name = jQuery('select[name="cat"]').val();
+        var category_text = jQuery("#cat option:selected").text();
+        var latitude = latitude;
+        var longitude = longitude;
+        //alert(category_name);
+        var url = 'index.php?option=com_rbids&view=ajax&task=ajax&method=choosencat&cat=' + category_name + '&lat=' + latitude + '&long=' + longitude;
+        jQuery.ajax({
+            type: "GET", 
+            url: url,
+            success: function(data)
+            {
+                jQuery('#emails_wrapper').show();
+                //alert(data);
+                console.log(data);
+                var html = '<center><u><h4>Professionals-Contractors to be notified</h4></u></center>';
+                html += '<strong>CURRENT CATEGORY SELECTION:</strong></br>';
+                html += category_text + ' will reach ' + '<strong>' + data + '</strong>' + ' Professionals-Contractors';
+                jQuery("#emails_wrapper").html(html);
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
+                alert("error");
+            }
+        });
+        
+    }
+    
+    
+    function getContractorsCountAllCat(latitude, longitude) {
+    
+        jQuery.noConflict();
+        var latitude = latitude;
+        var longitude = longitude;
+        var category_name = jQuery('select[name="cat"]').val();
+        //alert(category_name);
+        var url = 'index.php?option=com_rbids&view=ajax&task=ajax&cat=' + category_name + '&lat=' + latitude + '&long=' + longitude;
+        
+        jQuery.ajax({
+            type : "GET",
+            url : url,
+            data : {
+   
+                view : 'ajax',
+                format : 'json',
+                task : 'ajax'
+            },
+            dataType : 'json',
+            success : function(data) {
+                var count = Object.keys(data).length
+                if(count > 0) {
+                    jQuery("#emails_wrapper").append('</br></br><span><strong>OTHER SUGGESTIONS:</strong></span>')
+                    jQuery("#emails_wrapper").append('<ul>');
+                    jQuery.each( data, function( key, value ) {
+                        if(value > 0) {
+                            jQuery("#emails_wrapper").append('<li><i>' + key + '</i>' + " will reach " + '<strong>' + value + ' </strong> Professionals-Contractors</li>');
+                        }
+                        console.log( key + ": " + value );
+                    });
+                    jQuery("#emails_wrapper").append('</ul>');
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
+                console.log("error");
+            }
+        });
+        
+        
+        
+       
+        
+    }

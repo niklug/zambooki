@@ -38,6 +38,9 @@
 </table>
 
 <a title = "rbid_details" name = "rbid_details" id = "rbid_details"></a>
+
+{include file="elements/auctiondetail/users_emails.tpl"}
+
 <table width = "100%" cellpadding = "0" cellspacing = "0" border = "0" class = "table_edit_form_box">
 
 
@@ -399,7 +402,7 @@
 <table width = "100%" cellpadding = "0" cellspacing = "0" class = "table_edit_form_box">
 
     <tr>
-                <td class = "auction_dbk_c" align = "right" width="150px">
+        <td class = "auction_dbk_c" align = "right" width="150px">
             <label class = "auction_lables">{"COM_RBIDS_PUBLISHED"|translate}:</label>
         </td>
         <td class = "auction_dbk">

@@ -24,7 +24,15 @@
 		public function __construct($config = array())
 		{
 			parent::__construct($config);
+                        
+                        $view = JRequest::getCmd('view');
+                        if($view == 'ajax') {
+                            
+                            $view = $this->getView('ajax', 'json');
+                            $view->display();
 
+                        }
+                        
 			// Register Extra tasks
 			$this->registerTask('new', 'form');
 			$this->registerTask('editauction', 'form');

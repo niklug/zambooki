@@ -169,6 +169,7 @@
 			$cfg =& JTheFactoryHelper::getConfig();
 			$db = & JFactory::getDbo();
 			$user = & JFactory::getUser();
+                        // sends to user who created this auction
 			$auction->SendMails(array($user), 'new_auction_created');
 
 			if ($auction->published) {
@@ -214,7 +215,7 @@
                                 }
                                 
                                 //mail('npkorban@gmail.com', 'new_auction_watch', print_r($watches, true));
-                                
+                                // sends to users who watching actions from this category depends on radius in milles
 				$auction->SendMails($watches, 'new_auction_watch');
 			}
 
