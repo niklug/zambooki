@@ -14,7 +14,19 @@ defined('_JEXEC') or die();
     .cMedia-Box div.cMedia-Avatar a.cMedia-Thumb img {
         height: 200px;
     }
+    #search_sort {
+        left: 50%;
+        margin-left: -155px;
+        margin-top: 1px;
+        padding: 2px;
+        position: absolute;
+    }
     
+    #search_sort input {
+        color: #686868;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 </style>
 <?php
 if( $photos && $isOwner )
@@ -50,10 +62,19 @@ joms.jQuery(document).ready(function(){
 
 </script>
 <?php 
+
+
 $allphotos  = JRequest::getVar('allphotos');
 $search_photos_all = JRequest::getVar('search_photos_all');
 if($allphotos) {?>
-    <form action="" method="post" name="adminForm" id="adminForm">
+    <form action="" method="get">
+        <input type="hidden" name="option" value="com_community" /> 
+        <input type="hidden" name="view" value="photos" /> 
+        <input type="hidden" name="task" value="album" /> 
+        <input type="hidden" name="albumid" value="<?php echo JRequest::getVar('albumid')?>" /> 
+        <input type="hidden" name="userid" value="<?php echo JRequest::getVar('userid')?>" /> 
+        <input type="hidden" name="allphotos" value="<?php echo JRequest::getVar('allphotos')?>" /> 
+        <input type="hidden" name="start" value="0" /> 
         <div style=" margin-bottom: 30px;  position: relative;  text-align: right;" class="">
             <a style="background-image: url('/components/com_community/templates/default/images/toogle_button_of.png');
                 background-repeat: no-repeat;
@@ -64,11 +85,17 @@ if($allphotos) {?>
                href="index.php?option=com_community&view=photos&resetallphotos=1"
                title="Turn Album View On/Off">
             </a>
+            <div id="search_sort">
+                <input class="btn hasTooltip" type="submit" title="Sort by Most Popular Photos" name="search_by_most_popular" value="Most Popular">
+                <input class="btn hasTooltip" type="submit" title="Sort by Newest Photos" name="search_by_newest" value="Newest">
+            </div>
            <input type="text" name="search_photos_all" id="filter_search" placeholder="<?php echo JText::_('Search Photos'); ?>" value="<?php echo $search_photos_all?>" title="<?php echo JText::_('Search Photos'); ?>" />
             <button class="btn hasTooltip" type="submit" title="<?php echo JText::_('Search'); ?>"><i class="icon-search"></i></button>
             <button class="btn hasTooltip" type="button" title="<?php echo JText::_('Clear'); ?>" onclick="document.id('filter_search').value='';this.form.submit();"><i class="icon-remove"></i></button>
         </div>
     </form>
+
+
 <?php 
 }
 ?>

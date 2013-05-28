@@ -371,17 +371,51 @@ implements CLimitsInterface
 					. 'WHERE ' . $db->quoteName( 'albumid' ) . '=' . $db->Quote( $id );
                 
                 //TODO
-                
+                $session = JFactory::getSession();
                 $allphotos  = JRequest::getVar('allphotos');
                 $search_photos = JRequest::getVar('search_photos_all');
+                $search_by_most_populars = JRequest::getVar('search_by_most_popular');
+                $search_by_newest = JRequest::getVar('search_by_newest');
+                
+                $search_photos_array = preg_split('/\s+/', $search_photos);
+                
+
+                if(isset($search_by_most_populars)) {
+                    $session->set('search_by_most_populars', 1);
+                    $session->set('search_by_newest', 0);
+                }
+                if(isset($search_by_newest)) {
+                    $session->set('search_by_most_populars', 0);
+                    $session->set('search_by_newest', 1);
+                }
+                
+                
+                /*
+                require_once('FirePHPCore/FirePHP.class.php');
+
+                $firephp = FirePHP::getInstance(true);
+
+                //$var = array('i' => 10, 'j' => 20);
+
+                $firephp->log($search_by_most_populars, 'debug');
+                 * 
+                 */
+                
+                
                 
                 if($allphotos) {
                     $limit = 20;
                     $extraSQL = '';
                     if($search_photos) {
                         $extraSQL = ' WHERE caption LIKE '  . $db->Quote('%' .  $search_photos . '%');
+                        // search by seleral tags
+                        foreach ($search_photos_array as $search_key) {
+                            $extraSQL .= ' OR caption LIKE '. $db->Quote('%' .  $search_key . '%');
+                        }
+             
                     }
-                    $query		= 'SELECT COUNT(*) FROM ' . $db->quoteName( '#__community_photos') . $extraSQL;
+            
+                    $query		= 'SELECT DISTINCT COUNT(*) FROM ' . $db->quoteName( '#__community_photos') . $extraSQL;
                 }
 
 		$db->setQuery( $query );
@@ -417,18 +451,33 @@ implements CLimitsInterface
                 
                 //TODO
                 if($allphotos) {
+                 
                                         
                     $extraSQL = $includeUnpublishedwhere;
                     
                     if($search_photos) {
                         
                         $extraSQL = ' WHERE caption LIKE '  . $db->Quote('%' .  $search_photos . '%') . $includeUnpublished;
+                         // search by seleral tags
+                        foreach ($search_photos_array as $search_key) {
+                            $extraSQL .= ' OR caption LIKE '. $db->Quote('%' .  $search_key . '%');
+                        }
+                    }
+                    
                   
-                    } 
+                    // search by most popular photos
+                    if ((isset($search_by_most_populars)) OR $session->get('search_by_most_populars')) {
+                        $extraSQL .= ' ORDER BY hits DESC ';
+                    } elseif (isset($search_by_newest) OR $session->get('search_by_newest')) {
+                        $extraSQL .=  ' ORDER BY `created` DESC ';
+  
+                    } else {
+                        $extraSQL .=  ' ORDER BY `ordering` ASC ';
+                    }
                     
-                    $extraSQL .= ' ORDER BY `ordering` ASC '   . 'LIMIT ' . $limitstart . ',' . $limit;
+                    $extraSQL .=  'LIMIT ' . $limitstart . ',' . $limit;
                     
-                    $query	= 'SELECT * FROM ' . $db->quoteName( '#__community_photos') . $extraSQL;
+                    $query	= 'SELECT DISTINCT * FROM ' . $db->quoteName( '#__community_photos') . $extraSQL;
                 
                 }
 
@@ -586,11 +635,37 @@ implements CLimitsInterface
                 
                 
                 $search_photos = JRequest::getVar('search_photos');
+                $search_by_most_populars = JRequest::getVar('search_by_most_popular');
+                $search_by_newest = JRequest::getVar('search_by_newest');
+                
+                $session = JFactory::getSession();
+                if(isset($search_by_most_populars)) {
+                    $session->set('search_by_most_populars', 1);
+                    $session->set('search_by_newest', 0);
+                }
+                if(isset($search_by_newest)) {
+                    $session->set('search_by_most_populars', 0);
+                    $session->set('search_by_newest', 1);
+                }
+                
+                //require_once('FirePHPCore/FirePHP.class.php');
+
+                //$firephp = FirePHP::getInstance(true);
+
+                //$var = array('i' => 10, 'j' => 20);
+                $search_photos_array = preg_split('/\s+/', $search_photos);
+
+                //$firephp->log($search_photos_array, 'debug');
                 
                 if($search_photos) {
                     $extraSQL	.= ' WHERE permissions <=' . $db->Quote( $permissions ) . '
                         AND (name LIKE '  . $db->Quote('%' .  $search_photos . '%') . '
                         OR   description LIKE '  . $db->Quote('%' .  $search_photos . '%') . '  ) ';
+                    // search by seleral tags
+                    foreach ($search_photos_array as $search_key) {
+                        $extraSQL .= ' OR (name LIKE '  . $db->Quote('%' .  $search_key . '%') . '
+                            OR   description LIKE '  . $db->Quote('%' .  $search_key . '%') . '  ) ';
+                    }
                 } else {
                     $extraSQL	.= ' WHERE permissions <=' . $db->Quote( $permissions ) . '  ';
                 }
@@ -599,13 +674,18 @@ implements CLimitsInterface
 
 		$query = 'SELECT * FROM ' . $db->quoteName( '#__community_photos_albums') ;
 		$query .= $extraSQL;
-		$query .= " ORDER BY `created` DESC ";
-                
-                $allphotos  = JRequest::getVar('allphotos');
-                if($allphotos) {
-                    $query		= 'SELECT * FROM ' . $db->quoteName( '#__community_photos');
+	        
+                $session = JFactory::getSession();
+                // search by most popular photos
+                if (isset($search_by_most_populars) OR $session->get('search_by_most_populars')) {
+                    $query .= ' ORDER BY hits DESC ';
+                } elseif (isset($search_by_newest) OR $session->get('search_by_newest')) {
+                    $query .= " ORDER BY `created` DESC ";
+                } else {
+                    $query .= " ORDER BY `created` DESC ";
+              
                 }
-                
+               
                 
 		//echo $query;
 		$db->setQuery( $query );

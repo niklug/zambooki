@@ -8,6 +8,21 @@
  */
 defined('_JEXEC') or die();
 ?>
+<style>
+    #search_sort {
+        left: 50%;
+        margin-left: -155px;
+        margin-top: 1px;
+        padding: 2px;
+        position: absolute;
+    }
+    
+    #search_sort input {
+        color: #686868;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+</style>
 <script type="text/javascript">
 	joms.jQuery(document).ready(function() {
 		joms.jQuery("img.cAvatar").bind("mouseover", function(event) {
@@ -22,7 +37,11 @@ defined('_JEXEC') or die();
    
 ?>
 
-<form action="index.php?option=com_community&view=photos" method="post" name="adminForm" id="adminForm">
+<form action="" method="get" >
+    <input type="hidden" name="option" value="com_community" /> 
+    <input type="hidden" name="view" value="photos" /> 
+    <input type="hidden" name="resetallphotos" value="<?php echo JRequest::getVar('resetallphotos')?>" /> 
+    <input type="hidden" name="start" value="0" /> 
     <div style=" margin-bottom: 30px;  position: relative;  text-align: right;" class="">
         <a style="background-image: url('/components/com_community/templates/default/images/toogle_button_on.png');
             background-repeat: no-repeat;
@@ -33,6 +52,10 @@ defined('_JEXEC') or die();
            href="<?php echo CRoute::_('index.php?option=com_community&view=photos&task=album&userid=' . $user->id . '&allphotos=1') ?>"
            title="Turn Album View On/Off">
         </a>
+        <div id="search_sort">
+            <input class="btn hasTooltip" type="submit" title="Sort by Most Popular Photos" name="search_by_most_popular" value="Most Popular">
+            <input class="btn hasTooltip" type="submit" title="Sort by Newest Photos" name="search_by_newest" value="Newest">
+        </div>
        <input type="text" name="search_photos" id="filter_search" placeholder="<?php echo JText::_('Search Photos'); ?>" value="<?php echo $search_photos?>" title="<?php echo JText::_('Search Photos'); ?>" />
         <button class="btn hasTooltip" type="submit" title="<?php echo JText::_('Search'); ?>"><i class="icon-search"></i></button>
         <button class="btn hasTooltip" type="button" title="<?php echo JText::_('Clear'); ?>" onclick="document.id('filter_search').value='';this.form.submit();"><i class="icon-remove"></i></button>
