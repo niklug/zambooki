@@ -10,10 +10,16 @@
  */
 defined('_JEXEC') or die();
 ?>
+<style>
+    .cMedia-Box div.cMedia-Avatar a.cMedia-Thumb img {
+        height: 200px;
+    }
+    
+</style>
 <?php
 if( $photos && $isOwner )
 {
-?>
+?>+
 <script type="text/javascript" src="<?php echo rtrim(JURI::root(),'/'); ?>/components/com_community/assets/ui.core.js"></script>
 <script type="text/javascript" src="<?php echo rtrim(JURI::root(),'/'); ?>/components/com_community/assets/ui.sortable.js"></script>
 <script type='text/javascript'>
@@ -104,7 +110,7 @@ if($allphotos) {?>
 					</a>
                                         <div class="cMedia-Details small">
                                                 <?php 
-                                                echo CStringHelper::ezDate($row->created).' ago ';
+                                              
                                                 echo JText::_('COM_COMMUNITY_PHOTOS_BY'); ?>
                                                 <a href="<?php echo CRoute::_('index.php?option=com_community&view=profile&userid='.$row->creator); ?>"><?php echo $user->name; ?></a>
                                             
