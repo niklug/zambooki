@@ -35,7 +35,7 @@ class CommunityViewSearch extends CommunityView
 		}
 		else
 		{
-			$this->addSubmenuItem('index.php?option=com_community&view=friends', JText::_('COM_COMMUNITY_FRIENDS_VIEW_ALL'));
+			$this->addSubmenuItem('index.php?option=com_community&view=search&task=browse', JText::_('COM_COMMUNITY_FRIENDS_VIEW_ALL'));
 
 			$tmpl = new CTemplate();
 			$tmpl->set( 'url', CRoute::_('index.php?option=com_community&view=search') );
