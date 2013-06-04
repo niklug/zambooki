@@ -11,7 +11,29 @@
  
 defined('_JEXEC') or die();
 ?>
+
+<script type="text/javascript">
+    var strip, strcountry, strcity, strregion, strlatitude, strlongitude, strtimezone
+    function GetUserInfo(data) {
+        strip = data.host; strcountry = data.countryName; strcity = data.city;
+        strregion = data.region; strlatitude = data.latitude; strlongitude = data.longitude;
+        strtimezone = data.timezone;
+    }
+
+    function BindUserInfo() {
+        alert(strregion);
+        joms.jQuery("#value1").val(strcountry);
+        joms.jQuery("#value2").val(strregion);
+
+        
+        
+    }
+</script>
+<script type="text/javascript" src="http://smart-ip.net/geoip-json?callback=GetUserInfo"></script>
+        
+        
 <script type="text/JavaScript">
+   
 
 jsAdvanceSearch = {
 			action: {
@@ -29,7 +51,7 @@ jsAdvanceSearch = {
 							criteria +='</a>';
 						criteria +='</div>';
 						criteria +='<div id="selectfield'+keynum+'">';
-							criteria +='<select name="field'+keynum+'" id="field'+keynum+'" onchange="jsAdvanceSearch.action.changeField(\''+keynum+'\');" style="width:150px;">';
+							criteria +='<select name="field'+keynum+'" id="field'+keynum+'" onchange="jsAdvanceSearch.action.changeField(\''+keynum+'\');" style="width:200px;">';
 								<?php 
 								foreach($fields as $label=>$data)
 								{
@@ -61,7 +83,7 @@ jsAdvanceSearch = {
 							criteria +='</select>';
 						criteria +='</div>';
 						criteria +='<div id="selectcondition'+keynum+'">';
-							criteria +='<select name="condition'+keynum+'" id="condition'+keynum+'" style="width:150px;">';
+							criteria +='<select name="condition'+keynum+'" id="condition'+keynum+'" style="width:200px;">';
 								criteria +='<option value=""></option>';
 							criteria +='</select>';
 						criteria +='</div>';
@@ -88,6 +110,51 @@ jsAdvanceSearch = {
 					joms.jQuery('#criteriaContainer').append(criteria);
 					jsAdvanceSearch.action.changeField(keynum);
 					jsAdvanceSearch.action.keynum++;
+                                        
+                                        if(keynum == '0') {
+                                     
+                                            joms.jQuery("#field" + keynum).val('XIPT_PROFILETYPE');
+                                            
+                                            
+                              
+                                            //joms.jQuery("#field" + keynum).hide();
+                                            
+                                            //joms.jQuery("#selectfield" + keynum).append('<span style="width:190px;display: block;">Profiletype (Owner/Prof.)</span>');
+                                            
+                                         }
+                                        
+                                              
+                                        if(keynum == '1') {
+                                            joms.jQuery("#field" + keynum).val('FIELD_CITY');
+                                            jsAdvanceSearch.action.changeField(keynum);
+                                            joms.jQuery("#value" + keynum).val(strcity);
+                                            //joms.jQuery("#field" + keynum).hide();
+                                           //joms.jQuery("#selectfield" + keynum).append('<span style="width:190px;display: block;">City</span>');
+                                            
+                                        }
+                                        
+                                        if(keynum == '2') {
+                                            joms.jQuery("#field" + keynum).val('FIELD_STATE');
+                                            jsAdvanceSearch.action.changeField(keynum);
+                                            joms.jQuery("#value" + keynum).val(strregion);
+                                            //joms.jQuery("#field" + keynum).hide();
+                                            
+                                            //joms.jQuery("#selectfield" + keynum).append('<span style="width:190px;display: block;">State</span>');
+                                            
+                                        }
+                                        
+                                                  
+                                        
+                                        if(keynum == '3') {
+                                            joms.jQuery("#field" + keynum).val('FIELD_COUNTRY');
+                                            jsAdvanceSearch.action.changeField(keynum);
+                                            joms.jQuery("#value" + keynum).val(strcountry);
+                                            //joms.jQuery("#field" + keynum).hide();
+                                  
+                                            //joms.jQuery("#selectfield" + keynum).append('<span style="width:190px;display: block;">Country</span>');
+        
+                                        }
+                                        
 				},
 				removeCriteria: function ( id ) {
 					var inputs = [];
@@ -164,7 +231,7 @@ jsAdvanceSearch = {
 													list	+= '<div class="clr"></div>';													
 													list	+= '</div>'
 												<?php } else { ?>
-													list = '<select name="value'+id+'" id="value'+id+'" style="width:157px;">';
+													list = '<select name="value'+id+'" id="value'+id+'" style="width:200px;">';
 													<?php
 													foreach($field->options as $data)
 													{
@@ -185,7 +252,7 @@ jsAdvanceSearch = {
 						}
 						?>
 						default :
-							list = '<input type="text" name="value'+id+'" id="value'+id+'" style="width:145px;"/>';
+							list = '<input type="text" name="value'+id+'" id="value'+id+'" style="width:185px;"/>';
 					}	
 					return list;
 				},
@@ -331,6 +398,11 @@ jsAdvanceSearch = {
 		}
 			
 	joms.jQuery(document).ready( function() {
+        
+  
+
+    
+    
 		var searchHistory, operator;
 	<?php if(!empty($filterJson)){?>
 		searchHistory = eval(<?php echo $filterJson; ?>);
@@ -348,7 +420,11 @@ jsAdvanceSearch = {
 			
 			joms.jQuery(keylist).each(function(){
 				num = jsAdvanceSearch.action.keynum;
+                                
 				jsAdvanceSearch.action.addCriteria();
+                                
+           
+                                
 				joms.jQuery('#field'+num).val(searchHistory['field'+this]);
 				jsAdvanceSearch.action.changeField(num);
 				joms.jQuery('#condition'+num).val(searchHistory['condition'+this]);
@@ -387,9 +463,19 @@ jsAdvanceSearch = {
 			}
 		}else{
 			operator = 'operator_all';
+                        
 			jsAdvanceSearch.action.addCriteria();
+                        
+                        jsAdvanceSearch.action.addCriteria();
+                        
+                        jsAdvanceSearch.action.addCriteria();
+
+                        jsAdvanceSearch.action.addCriteria();
+
+                      
 		}
 		joms.jQuery('#'+operator).attr("checked", true);
+          
 	});
 	
 </script>
@@ -398,8 +484,20 @@ jsAdvanceSearch = {
 	<p id="criteriaTitle">
 		<b><?php echo JText::_("COM_COMMUNITY_CRITERIA"); ?></b>
 	</p>
-	<div id="criteriaContainer">
-	</div>	
+
+
+ 
+                            
+        <div id="criteriaContainer">
+            
+            
+            
+        </div>
+                            
+        
+        
+        
+        
 	<div id="optionContainer">
 		<div class="criteria-option-top clearfull">
 			<a class="add" href="javascript:void(0);" onclick="jsAdvanceSearch.action.addCriteria();">
@@ -411,6 +509,8 @@ jsAdvanceSearch = {
 			<label class="lblradio" style="padding-right: 20px;"><input type="radio" name="operator" id="operator_all" value="and" class="input radio"> <?php echo JText::_("COM_COMMUNITY_MATCH_ALL_CRITERIA"); ?></label>
 			<label class="lblradio" style="padding-right: 20px;"><input type="radio" name="operator" id="operator_any" value="or" class="input radio"> <?php echo JText::_("COM_COMMUNITY_MATCH_ANY_CRITERIA"); ?></label>
 			<label class="lblradio" style="padding-right: 20px;"><input type="checkbox" name="avatar" id="avatar" style="margin-right: 5px;" value="1" class="input radio"<?php echo ($avatarOnly) ? ' checked="checked"' : ''; ?>><?php echo JText::_('COM_COMMUNITY_EVENTS_AVATAR_ONLY'); ?></label>
+                       
+                                 
 			<input type="hidden" name="option" value="com_community" />
 			<?php
 			// If non-sef url used, we'd need to add these 
@@ -438,3 +538,7 @@ jsAdvanceSearch = {
 </form>
 </div>
 <br />
+
+
+<?php
+        

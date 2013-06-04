@@ -76,7 +76,7 @@ if($allphotos) {?>
         <input type="hidden" name="allphotos" value="<?php echo JRequest::getVar('allphotos')?>" /> 
         <input type="hidden" name="start" value="0" /> 
         <div style=" margin-bottom: 30px;  position: relative;  text-align: right;" class="">
-            <a style="background-image: url('/components/com_community/templates/default/images/toogle_button_of.png');
+            <a style="background-image: url('components/com_community/templates/default/images/toogle_button_of.png');
                 background-repeat: no-repeat;
                 display: block;
                 height: 50px;

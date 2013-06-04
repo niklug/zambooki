@@ -43,7 +43,7 @@ defined('_JEXEC') or die();
     <input type="hidden" name="resetallphotos" value="<?php echo JRequest::getVar('resetallphotos')?>" /> 
     <input type="hidden" name="start" value="0" /> 
     <div style=" margin-bottom: 30px;  position: relative;  text-align: right;" class="">
-        <a style="background-image: url('/components/com_community/templates/default/images/toogle_button_on.png');
+        <a style="background-image: url('components/com_community/templates/default/images/toogle_button_on.png');
             background-repeat: no-repeat;
             display: block;
             height: 50px;
