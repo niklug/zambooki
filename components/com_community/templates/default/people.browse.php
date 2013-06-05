@@ -182,95 +182,226 @@ if( $featuredList && $showFeaturedList )
 		<?php if(!empty($row->user->id) && !empty($displayname)) : ?>
 		<li>
 		<div class="cIndex-Box clearfix">
-			<a href="<?php echo $row->profileLink; ?>" class="cIndex-Avatar cFloat-L">
-				<img class="cAvatar" src="<?php echo $row->user->getThumbAvatar(); ?>" alt="<?php echo $row->user->getDisplayName(); ?>" />
-				<?php if($row->user->isOnline()): ?>
-				<b class="cStatus-Online">
-					<?php echo JText::_('COM_COMMUNITY_ONLINE'); ?>
-				</b>
-				<?php endif; ?>
-			</a>
-			<div class="cIndex-Content">
-				<h3 class="cIndex-Name cResetH">
-					<a href="<?php echo $row->profileLink; ?>"><?php echo $row->user->getDisplayName(); ?></a>
-				</h3>
-				<div class="cIndex-Status"><?php echo $row->user->getStatus() ;?></div>
-				<div class="cIndex-Actions">
+                	<div style="margin:0;" class="cIndex-Content">
+                            <?php
+                                
+                                $user_cf = CFactory::getUser($row->user->id);
+                                $karmaImgUrl = CUserPoints::getPointsImage($user_cf);
+                            
+                            ?>
+                            <table border="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="width:70px;padding: 0 5px;">
+                                           <a href="<?php echo $row->profileLink; ?>" class="cIndex-Avatar cFloat-L">
+                                                    <img class="cAvatar" src="<?php echo $row->user->getThumbAvatar(); ?>" alt="<?php echo $row->user->getDisplayName(); ?>" />
+                                                    <?php if($row->user->isOnline()): ?>
+                                                    <b class="cStatus-Online">
+                                                            <?php echo JText::_('COM_COMMUNITY_ONLINE'); ?>
+                                                    </b>
+                                                    <?php endif; ?>
+                                            </a>
+                                        </td>
+                                        <td style="width:220px;padding: 0 5px;">
+                                            <h3 class="cIndex-Name cResetH">
+                                            <a href="<?php echo $row->profileLink; ?>">
+                                                <?php 
+                                                $user_name = $row->user->getDisplayName();
+                                                $user_company = $row->user->getInfo(FIELD_COMPANY);
+                                                if($user_company) {
+                                                    echo $user_company;
+                                                } else {
+                                                    echo $user_name;
+                                                }
+                                                ?>
+                                            </a>
+                                            <div><img src="<?php echo $karmaImgUrl; ?>" alt="" /></div>
+                                            <span style="font-size:14px">
+                                            <?php
+                                            //echo $user_cf->getKarmaPoint() . ' Reviews';
+                                            ?>
+                                            </span>
+                                            </h3>
+                                            <!--
+                                            <div class="cIndex-Status"><?php echo $row->user->getStatus() ;?></div>
+                                            -->
+                                        </td>
+                                        <td style="width:150px;padding: 0 5px;">
+                                            <strong>
+                                            <?php
+                                            
+                                            $home_phone = $row->user->getInfo(FIELD_LANDPHONE);
+                                            if($home_phone) {
+                                                echo $home_phone;
+                                            } else {
+                                                echo $mob_phone = $row->user->getInfo(FIELD_MOBILE);
+                                            }
+                                            echo "</br>";
+                                            ?>
+                                            </strong>
+                                            <?php
+                                            $FIELD_CITY = $row->user->getInfo(FIELD_CITY);
+                                            $FIELD_STATE = $row->user->getInfo(FIELD_STATE);
+                                            $FIELD_POSTAL_CODE = $row->user->getInfo(FIELD_POSTAL_CODE);
+                                            if($FIELD_CITY) echo $FIELD_CITY ;
+                                            if($FIELD_STATE) echo ', ' . $FIELD_STATE;
+                                            if($FIELD_POSTAL_CODE) echo  ', '. $FIELD_POSTAL_CODE ;
+                                            ?>
+                                        </td>
+                                        <td style="width:220px;padding: 0 5px;">
+                                            <?php
+                                            echo $row->user->getInfo(FIELD_ABOUTME);
+                                            ?>
+                                        </td>
+                                        <td style="width:200px;padding: 0 5px;">
+                                            <?php if( $config->get('enablepm') && $my->id != $row->user->id ): ?>
+                                            <div>
+                                                    <i class="com-icon-mail-go"></i>
+                                                    <a onclick="<?php echo CMessaging::getPopup($row->user->id); ?>" href="javascript:void(0);">
+                                                            <?php echo JText::_('COM_COMMUNITY_INBOX_SEND_MESSAGE'); ?>
+                                                    </a>
+                                            </div>
+                                            <?php endif; ?>
+                                            <span style="color: #EFA017;">
+                                            <?php
+                                            echo 'Contact: ' .  $user_name;
+                                            ?>
+                                            </span>
+                                            
+                                            
+                                            <?php
 
-					<?php if( $config->get('enablepm') && $my->id != $row->user->id ): ?>
-						<div>
-							<i class="com-icon-mail-go"></i>
-							<a onclick="<?php echo CMessaging::getPopup($row->user->id); ?>" href="javascript:void(0);">
-								<?php echo JText::_('COM_COMMUNITY_INBOX_SEND_MESSAGE'); ?>
-							</a>
-						</div>
-					<?php endif; ?>
+                                            if($row->addFriend)
+                                            {
+                                            ?>
+                                                    <div>
+                                                            <?php if(isset($row->isMyFriend) && $row->isMyFriend==1){ ?>
+                                                                    <i class="com-icon-info"></i>
+                                                                    <a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $row->user->id;?>')"><span><?php echo JText::_('COM_COMMUNITY_PROFILE_PENDING_FRIEND_REQUEST'); ?></span></a>
+                                                            <?php } else { ?>
+                                                                    <i class="com-icon-user-plus"></i>
+                                                                    <a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $row->user->id;?>')"><span><?php echo JText::_('COM_COMMUNITY_PROFILE_ADD_AS_FRIEND'); ?></span></a>
+                                                            <?php } ?>
+                                                    </div>
+                                            <?php
+                                            }
+                                            else
+                                            {
+                                            ?>
+                                            <?php
+                                                    if( ($my->id != $row->user->id) && ($my->id !== 0) )
+                                                    {
+                                            ?>
+                                                    <div>
+                                                            <i class="com-icon-tick"></i>
+                                                            <a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $row->user->id;?>')"><span><?php echo JText::_('COM_COMMUNITY_PROFILE_ADDED_AS_FRIEND'); ?></span></a>
+                                                    </div>
+                                            <?php
+                                                    }
+                                                    else if($my->id == 0)
+                                                    {
+                                            ?>
+                                                    <div>
+                                                            <i class="com-icon-user-plus"></i>
+                                                            <a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $row->user->id;?>')"><span><?php echo JText::_('COM_COMMUNITY_PROFILE_ADD_AS_FRIEND'); ?></span></a>
+                                                    </div>
+                                            <?php
+                                                    }
+                                            }
+                                            ?>
+                                            
+                                            
+                                            <!-- 
+                                            <div class="cIndex-Actions">
 
-					<div>
-						<i class="com-icon-groups"></i>
-						<span><?php echo JText::sprintf( (CStringHelper::isPlural($row->friendsCount)) ? 'COM_COMMUNITY_FRIENDS_COUNT_MANY' : 'COM_COMMUNITY_FRIENDS_COUNT', $row->friendsCount);?></span>
-					</div>
+                                                    <?php if( $config->get('enablepm') && $my->id != $row->user->id ): ?>
+                                                            <div>
+                                                                    <i class="com-icon-mail-go"></i>
+                                                                    <a onclick="<?php echo CMessaging::getPopup($row->user->id); ?>" href="javascript:void(0);">
+                                                                            <?php echo JText::_('COM_COMMUNITY_INBOX_SEND_MESSAGE'); ?>
+                                                                    </a>
+                                                            </div>
+                                                    <?php endif; ?>
+                                                    
+                                                    <div>
+                                                            <i class="com-icon-groups"></i>
+                                                            <span><?php echo JText::sprintf( (CStringHelper::isPlural($row->friendsCount)) ? 'COM_COMMUNITY_FRIENDS_COUNT_MANY' : 'COM_COMMUNITY_FRIENDS_COUNT', $row->friendsCount);?></span>
+                                                    </div>
+                                                    
+                                                    <?php
+                                                     /*
+                                                    if($row->addFriend)
+                                                    {
+                                                    ?>
+                                                            <div>
+                                                                    <?php if(isset($row->isMyFriend) && $row->isMyFriend==1){ ?>
+                                                                            <i class="com-icon-info"></i>
+                                                                            <a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $row->user->id;?>')"><span><?php echo JText::_('COM_COMMUNITY_PROFILE_PENDING_FRIEND_REQUEST'); ?></span></a>
+                                                                    <?php } else { ?>
+                                                                            <i class="com-icon-user-plus"></i>
+                                                                            <a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $row->user->id;?>')"><span><?php echo JText::_('COM_COMMUNITY_PROFILE_ADD_AS_FRIEND'); ?></span></a>
+                                                                    <?php } ?>
+                                                            </div>
+                                                    <?php
+                                                    }
+                                                    else
+                                                    {
+                                                    ?>
+                                                    <?php
+                                                            if( ($my->id != $row->user->id) && ($my->id !== 0) )
+                                                            {
+                                                    ?>
+                                                            <div>
+                                                                    <i class="com-icon-tick"></i>
+                                                                    <a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $row->user->id;?>')"><span><?php echo JText::_('COM_COMMUNITY_PROFILE_ADDED_AS_FRIEND'); ?></span></a>
+                                                            </div>
+                                                    <?php
+                                                            }
+                                                            else if($my->id == 0)
+                                                            {
+                                                    ?>
+                                                            <div>
+                                                                    <i class="com-icon-user-plus"></i>
+                                                                    <a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $row->user->id;?>')"><span><?php echo JText::_('COM_COMMUNITY_PROFILE_ADD_AS_FRIEND'); ?></span></a>
+                                                            </div>
+                                                    <?php
+                                                            }
+                                                    }
+                                                    ?>
 
-					<?php
-					if($row->addFriend)
-					{
-					?>
-						<div>
-							<?php if(isset($row->isMyFriend) && $row->isMyFriend==1){ ?>
-								<i class="com-icon-info"></i>
-								<a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $row->user->id;?>')"><span><?php echo JText::_('COM_COMMUNITY_PROFILE_PENDING_FRIEND_REQUEST'); ?></span></a>
-							<?php } else { ?>
-								<i class="com-icon-user-plus"></i>
-								<a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $row->user->id;?>')"><span><?php echo JText::_('COM_COMMUNITY_PROFILE_ADD_AS_FRIEND'); ?></span></a>
-							<?php } ?>
-						</div>
-					<?php
-					}
-					else
-					{
-					?>
-					<?php
-						if( ($my->id != $row->user->id) && ($my->id !== 0) )
-						{
-					?>
-						<div>
-							<i class="com-icon-tick"></i>
-							<a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $row->user->id;?>')"><span><?php echo JText::_('COM_COMMUNITY_PROFILE_ADDED_AS_FRIEND'); ?></span></a>
-						</div>
-					<?php
-						}
-						else if($my->id == 0)
-						{
-					?>
-						<div>
-							<i class="com-icon-user-plus"></i>
-							<a href="javascript:void(0)" onclick="joms.friends.connect('<?php echo $row->user->id;?>')"><span><?php echo JText::_('COM_COMMUNITY_PROFILE_ADD_AS_FRIEND'); ?></span></a>
-						</div>
-					<?php
-						}
-					}
-					?>
+                                                    <?php
+                                                   
+                                                    if( $isCommunityAdmin && !empty($featuredList))
+                                                    {
+                                                            if( !in_array($row->user->id, $featuredList) )
+                                                            {
+                                                    ?>
+                                                    <div id="featured-<?php echo $row->user->id;?>" class="cIndex-Feature">
 
-					<?php
-					if( $isCommunityAdmin && !empty($featuredList))
-					{
-						if( !in_array($row->user->id, $featuredList) )
-						{
-					?>
-					<div id="featured-<?php echo $row->user->id;?>" class="cIndex-Feature">
+                                                                    <a onclick="joms.featured.add('<?php echo $row->user->id;?>','search');"
+                                                                       href="javascript:void(0);"
+                                                                       class="cButton Icon"
+                                                                       title="<?php echo JText::_('COM_COMMUNITY_MAKE_FEATURED'); ?>">
+                                                                            <i class="com-icon-award-plus"></i>
+                                                                    </a>
+                                                    </div>
+                                                    <?php
+                                                            }
+                                                    }
+                                                     * 
+                                                     */
+                                                    ?>
+                                            </div>
+                                            -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-							<a onclick="joms.featured.add('<?php echo $row->user->id;?>','search');"
-							   href="javascript:void(0);"
-							   class="cButton Icon"
-							   title="<?php echo JText::_('COM_COMMUNITY_MAKE_FEATURED'); ?>">
-								<i class="com-icon-award-plus"></i>
-							</a>
-					</div>
-					<?php
-						}
-					}
-					?>
-				</div>
+                            
+                            
+				
+                                
 			</div>
 
 		</div>

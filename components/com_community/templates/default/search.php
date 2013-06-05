@@ -26,20 +26,24 @@ $city_input = addcslashes(JRequest::getVar('city_input'),"'");
 			<input type="text" id="q" class="cSearch-Text cFloat-L" name="q" value="<?php echo $this->escape( $query ); ?>" placeholder="<?php echo JText::_('COM_COMMUNITY_SEARCH_PEOPLE_PLACEHOLDER');?>" />
 			<input type="submit" value="<?php echo JText::_('COM_COMMUNITY_SEARCH_BUTTON_TEMP');?>" class="cButton cButton-Blue cFloat-R" name="Search" />
 		</label>
-                Search in: </br>
-                <div style=" height: 30px;  position: relative;  width: 100%;">
-                    <label  style="float: left; width: 100px; " class="label-checkbox" >
+                
+                <div style=" height: 30px;  position: relative;  width: 100%;clear: both;">
+                    <label  style="float: left; width: 80px; margin-left: 0;  padding-left: 0;" class="label-checkbox" >
+                        <strong>Search in:</strong>
+                    </label>
+                    
+                    <label  style="float: left; width: 60px; " class="label-checkbox" >
                             <input type="checkbox" name="for_country" id="for_country" value="1" onclick="showLocation(this.id, 'country')" <?php echo ($for_country) ? ' checked="checked"' : ''; ?>>
                             <?php echo JText::_('Country'); ?>
                     </label>
 
-                    <label  style="float: left; width: 100px;" class="label-checkbox" >
+                    <label  style="float: left; width: 50px;" class="label-checkbox" >
                             <input type="checkbox" name="for_state" id="for_state" value="1"  onclick="showLocation(this.id, 'state')" <?php echo ($for_state) ? ' checked="checked"' : ''; ?> >
                             <?php echo JText::_('State'); ?>
 
                     </label>
 
-                    <label  style="float: left; width: 100px;" class="label-checkbox" >
+                    <label  style="float: left; width: 80px;" class="label-checkbox" >
                              <input type="checkbox" name="for_city" id="for_city" value="1"  onclick="showLocation(this.id, 'city')" <?php echo ($for_city) ? ' checked="checked"' : ''; ?> >
                             <?php echo JText::_('City / Town'); ?>
                     </label>
@@ -50,7 +54,7 @@ $city_input = addcslashes(JRequest::getVar('city_input'),"'");
                 </div>
 
                 
-		<div  style="position: relative;  width: 450px"  class="cSearch-Helper">
+		<div  style="position: relative;  width: 310px;clear: both;"  class="cSearch-Helper">
 			<label  style="float: left;" class="label-checkbox" >
 				<input type="checkbox" name="avatar" id="avatar" value="1" class="input checkbox "<?php echo ($avatarOnly) ? ' checked="checked"' : ''; ?>>
 				<?php echo JText::_('COM_COMMUNITY_EVENTS_AVATAR_ONLY'); ?>
@@ -74,12 +78,14 @@ $city_input = addcslashes(JRequest::getVar('city_input'),"'");
 	if( $results )
 	{
 	?>
+   
 	<div class="cSearch-Result">
 		<p>
 			<b><?php echo JText::_('COM_COMMUNITY_SEARCH_RESULTS');?></b>
 		</p>
 		<?php echo $resultHTML;?>
 	</div>
+   
 	<?php
 	}
 	else if( empty( $results ) && !empty( $query ) )
@@ -120,15 +126,19 @@ $city_input = addcslashes(JRequest::getVar('city_input'),"'");
         var state_input = '<?php echo $state_input ?>';
         var city_input = '<?php echo $city_input ?>';
         
-        if(for_country) {
+        var country_checked = joms.jQuery('#for_country').is(':checked');
+        var state_checked = joms.jQuery('#for_state').is(':checked');
+        var city_checked = joms.jQuery('#for_city').is(':checked');
+        
+        if(for_country || country_checked) {
             joms.jQuery("#country_input").show();
             joms.jQuery("#country_input").val(country_input);
         }
-        if(for_state) {
+        if(for_state || state_checked) {
             joms.jQuery("#state_input").show();
             joms.jQuery("#state_input").val(state_input);
         }
-        if(for_city) {
+        if(for_city || city_checked) {
             joms.jQuery("#city_input").show();
             joms.jQuery("#city_input").val(city_input);
         }
