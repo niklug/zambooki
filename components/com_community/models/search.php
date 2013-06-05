@@ -75,6 +75,8 @@ class CommunityModelSearch extends JCCModel
 	{
 		return $this->_total;
 	}
+        
+        
 
 	/**
 	 * Search for people
@@ -82,11 +84,22 @@ class CommunityModelSearch extends JCCModel
 	 */
 	public function searchPeople($query , $avatarOnly = '', $friendId = 0 )
 	{
+ 
+
 		$db			= $this->getDBO();
 		$config		= CFactory::getConfig();
 		$filter		= array();
 		$data		= array();
 		$isEmail    = false;
+                
+                
+                $for_country = JRequest::getVar('for_country');
+                $for_state = JRequest::getVar('for_state');
+                $for_city = JRequest::getVar('for_city');
+                        
+                $country_input = addcslashes(JRequest::getVar('country_input'), "'");
+                $state_input = addcslashes(JRequest::getVar('state_input'), "'");
+                $city_input = addcslashes(JRequest::getVar('city_input'), "'");
 
 		//select only non empty field
 		foreach($query as $key => $value)
@@ -163,7 +176,11 @@ class CommunityModelSearch extends JCCModel
 				$query = 'SELECT distinct b.'.$db->quoteName('id')
 						.' FROM '.$db->quoteName('#__users').' b';
 				$query	.= ' INNER JOIN '.$db->quoteName('#__community_users').' AS c ON b.'.$db->quoteName('id').'=c.'.$db->quoteName('userid');
+                                
+                                $query	.= ' LEFT JOIN '.$db->quoteName('#__community_fields_values').' AS d ON d.'.$db->quoteName('user_id').'=c.'.$db->quoteName('userid');
 
+                          
+                                
 				if(!empty($friendListQuery)){
 				 $query.= $friendListQuery;
 				}
@@ -178,18 +195,115 @@ class CommunityModelSearch extends JCCModel
 				{
 					$query	.= ' AND c.'.$db->quoteName('thumb').' != ' . $db->Quote( '' );
 					$query	.= ' AND c.'.$db->quoteName('thumb').' != ' . $db->Quote( 'components/com_community/assets/default_thumb.jpg' );
+                                      
 				}
 
 				$query .= ' WHERE b.'.$db->quoteName('block').' = '.$db->Quote('0').' AND '.implode(' AND ',$filter). $filterquery;
+                                
+                                // BBB filter
+                                $BBB_Profile = JRequest::getVar('BBB_Profile');
+                                if($BBB_Profile) {
+                                    $BBB_query = "SELECT user_id FROM `#__community_fields_values` WHERE `field_id` = '23' AND `value` <> ''";
+                                    $db->setQuery( $BBB_query );
+                                    $BBB_IDS_RESULT = $db->loadColumn();
+                                    $BBB_IDS = implode(",",$BBB_IDS_RESULT);
+                                    if(empty($BBB_Profile)) $BBB_Profile = '0';
+                                    $query .= ' AND c.'.$db->quoteName('userid').' IN (' . $BBB_IDS .  ')';
+                                }
+                                
+                                // country filter
+                                if($for_country AND isset($country_input)) {
+                                    $country_query = "SELECT user_id FROM `#__community_fields_values` WHERE `field_id` = '11' AND `value` = '$country_input'";
+                                    $db->setQuery($country_query);
+                                    $country_RESULT = $db->loadColumn();
+                                    $country_IDS = implode(",", $country_RESULT);
+                                    if(empty($country_IDS)) $country_IDS = '0';
+                                    $query .= ' AND c.'.$db->quoteName('userid').' IN (' . $country_IDS .  ')';
+                                }
+                                
+                                // state filter
+                                if($for_state AND isset($state_input)) {
+                                    $state_query = "SELECT user_id FROM `#__community_fields_values` WHERE `field_id` = '9' AND `value` = '$state_input'";
+                                    $db->setQuery($state_query);
+                                    $state_RESULT = $db->loadColumn();
+                                    $state_IDS = implode(",", $state_RESULT);
+                                    if(empty($state_IDS)) $state_IDS = '0';
+                                    $query .= ' AND c.'.$db->quoteName('userid').' IN (' . $state_IDS .  ')';
+                                }
+                                
+                                // city filter
+                                if($for_city AND isset($city_input)) {
+                                    $city_query = "SELECT user_id FROM `#__community_fields_values` WHERE `field_id` = '10' AND `value` = '$city_input'";
+                                    $db->setQuery($city_query);
+                                    $city_RESULT = $db->loadColumn();
+                                    $city_IDS = implode(",", $city_RESULT);
+                                    
+                                    if(empty($city_IDS)) $city_IDS = '0';
+                                    $query .= ' AND c.'.$db->quoteName('userid').' IN (' . $city_IDS .  ')';
+                                }
+                                
+                                
+                                $query .= ' UNION DISTINCT ';
+                                // fields id
+                                $fields = array('19', '20', '26');
+                                $id = implode(",",$fields);
+                                $where = "`field_id` IN (".$id.") ";
 
-				$queryCnt	= 'SELECT COUNT(1) FROM ('.$query.') AS z';
+                                $query .= "SELECT DISTINCT a.user_id"
+                                        . ' FROM '.$db->quoteName('#__community_fields_values') . ' AS a '
+                                        . ' INNER JOIN '.$db->quoteName('#__community_users').' AS c ON a.'.$db->quoteName('user_id').'=c.'.$db->quoteName('userid')
+                                        . ' WHERE a.value LIKE ' . $db->Quote( '%' . $value . '%' ) 
+                                        . ' AND ' . $where
+                                        ;
+                                
+                                if( $avatarOnly )
+                                {
+                                        $query	.= ' AND c.'.$db->quoteName('thumb').' != ' . $db->Quote( '' );
+                                        $query	.= ' AND c.'.$db->quoteName('thumb').' != ' . $db->Quote( 'components/com_community/assets/default_thumb.jpg' );
+                   
+                                }
+                                
+                               // BBB filter
+                               if($BBB_Profile) {
+                                    if(empty($BBB_Profile)) $BBB_Profile = '0';
+                                    $query .= ' AND c.'.$db->quoteName('userid').' IN (' . $BBB_IDS .  ')';
+                                }
+                                
+                                
+                                // country filter
+                                if($for_country AND isset($country_input)) {
+                                    if(empty($country_IDS)) $country_IDS = '0';
+                                    $query .= ' AND c.'.$db->quoteName('userid').' IN (' . $country_IDS .  ')';
+                                }
+                                
+                                // state filter
+                                if($for_state AND isset($state_input)) {
+                                    if(empty($state_IDS)) $state_IDS = '0';
+                                    $query .= ' AND c.'.$db->quoteName('userid').' IN (' . $state_IDS .  ')';
+                                }
+                                
+                                // city filter
+                                if($for_city AND isset($city_input)) {
+                                    if(empty($city_IDS)) $city_IDS = '0';
+                                    $query .= ' AND c.'.$db->quoteName('userid').' IN (' . $city_IDS .  ')';
+                                }
+                          
+                                
+                                $queryCnt	= 'SELECT COUNT(1) FROM ('.$query.') AS z';
 				$db->setQuery($queryCnt);
 				$total	= $db->loadResult();
-
-				$query .=  " LIMIT " . $limitstart . "," . $limit;
+                     
+                                
+                                $query .=  " LIMIT " . $limitstart . "," . $limit;
+                                
+                                //echo $query;
 
 				$db->setQuery( $query );
 				$finalResult = $db->loadColumn();
+                                
+                    
+                               
+                                
 				if($db->getErrorNum()) {
 					JError::raiseError( 500, $db->stderr());
 				}

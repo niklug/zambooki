@@ -20,14 +20,6 @@ defined('_JEXEC') or die();
         strtimezone = data.timezone;
     }
 
-    function BindUserInfo() {
-        alert(strregion);
-        joms.jQuery("#value1").val(strcountry);
-        joms.jQuery("#value2").val(strregion);
-
-        
-        
-    }
 </script>
 <script type="text/javascript" src="http://smart-ip.net/geoip-json?callback=GetUserInfo"></script>
         
