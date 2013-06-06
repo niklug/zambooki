@@ -231,21 +231,31 @@ if( $featuredList && $showFeaturedList )
                                             <?php
                                             
                                             $home_phone = $row->user->getInfo(FIELD_LANDPHONE);
-                                            if($home_phone) {
+                                            if($home_phone  AND ($XIPT_PROFILETYPE == '4')) {
                                                 echo $home_phone;
-                                            } else {
+                                            } elseif($XIPT_PROFILETYPE == '4') {
                                                 echo $mob_phone = $row->user->getInfo(FIELD_MOBILE);
                                             }
                                             echo "</br>";
                                             ?>
                                             </strong>
                                             <?php
+                                            $FIELD_ADDRESS = $row->user->getInfo(FIELD_ADDRESS);
                                             $FIELD_CITY = $row->user->getInfo(FIELD_CITY);
                                             $FIELD_STATE = $row->user->getInfo(FIELD_STATE);
                                             $FIELD_POSTAL_CODE = $row->user->getInfo(FIELD_POSTAL_CODE);
+                                            $XIPT_PROFILETYPE = $row->user->getInfo(XIPT_PROFILETYPE);
+                                            
+                                               
+                                            if(($XIPT_PROFILETYPE == '4') AND $FIELD_ADDRESS) {
+                                                echo  $FIELD_ADDRESS . ' ';
+                                            }
+                                            
+                                            
                                             if($FIELD_CITY) echo $FIELD_CITY ;
                                             if($FIELD_STATE) echo ', ' . $FIELD_STATE;
-                                            if($FIELD_POSTAL_CODE) echo  ', '. $FIELD_POSTAL_CODE ;
+                                            if($FIELD_POSTAL_CODE AND ($XIPT_PROFILETYPE == '4') ) echo  ', '. $FIELD_POSTAL_CODE ;
+                                         
                                             ?>
                                         </td>
                                         <td style="width:220px;padding: 0 5px;">
